@@ -68,6 +68,12 @@ function Homepage() {
     }
   };
 
+  let hennaSerialNumber = 1;
+  let diyaSerialNumber = 1;
+  let nailSerialNumber = 1;
+  let manicureSerialNumber = 1;
+  let artSerialNumber = 1;
+  let faceSerialNumber = 1;
   return (
     <div className="main-div">
       <img src={logo} alt="" />
@@ -76,104 +82,110 @@ function Homepage() {
         <div className="sub-div">
           <div className="sub-sub-div henna">
             <div className="heading">Henna</div>
-            {fetchApi.map((data) => {
-              if (data.activity === "Henna") {
-                return (
-                  <div className="checkbox" key={data.id}>
-                    <div>
-                      <label>
-                        <input
-                          value={data.id}
-                          type="checkbox"
-                          onChange={(e) =>
-                            handleCheckboxChange(
-                              e.target.value,
-                              e.target.checked
-                            )
+            <div className="scroll-div henna-diya">
+              {fetchApi.map((data, index) => {
+                if (data.activity === "Henna (Mehndi)") {
+                  return (
+                    <div className="checkbox" key={data.id}>
+                      <div>
+                        <label>
+                          {hennaSerialNumber++}
+                          <input
+                            value={data.id}
+                            type="checkbox"
+                            onChange={(e) =>
+                              handleCheckboxChange(
+                                e.target.value,
+                                e.target.checked
+                              )
+                            }
+                          />
+                          {data.name}
+                        </label>
+                      </div>
+                      <div>
+                        <button
+                          className={
+                            data.status === "waiting"
+                              ? "waiting-btn"
+                              : data.status === "ready"
+                              ? "sending-btn"
+                              : data.status === "sent"
+                              ? "sent-btn"
+                              : ""
                           }
-                        />
-                        {data.name}
-                      </label>
-                    </div>
-                    <div>
-                      <button
-                        className={
-                          data.status === "waiting"
-                            ? "waiting-btn"
+                          onClick={() => onClick(data.id)}
+                          value={data.id}
+                        >
+                          {data.status === "waiting"
+                            ? "Send WhatsApp"
                             : data.status === "ready"
-                            ? "sending-btn"
+                            ? "Sending WhatsApp"
                             : data.status === "sent"
-                            ? "sent-btn"
-                            : ""
-                        }
-                        onClick={() => onClick(data.id)}
-                        value={data.id}
-                      >
-                        {data.status === "waiting"
-                          ? "Send WhatsApp"
-                          : data.status === "ready"
-                          ? "Sending WhatsApp"
-                          : data.status === "sent"
-                          ? "WhatsApp Sent"
-                          : ""}
-                      </button>
+                            ? "WhatsApp Sent"
+                            : ""}
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                );
-              }
-              return null;
-            })}
+                  );
+                }
+                return null;
+              })}{" "}
+            </div>
           </div>
 
           <div className="sub-sub-div diyapainting">
             <div className="heading">Diya Painting Workshop</div>
-            {fetchApi.map((data) => {
-              if (data.activity === "Diya Painting") {
-                return (
-                  <div className="checkbox" key={data.id}>
-                    <div>
-                      <label>
-                        <input
-                          type="checkbox"
-                          value={data.id}
-                          onChange={(e) =>
-                            handleCheckboxChange(
-                              e.target.value,
-                              e.target.checked
-                            )
+            <div className="scroll-div henna-diya">
+              {fetchApi.map((data, index) => {
+                if (data.activity === "Diya Painting Workshop") {
+                  return (
+                    <div className="checkbox" key={data.id}>
+                      <div>
+                        <label>
+                          {diyaSerialNumber++}
+                          <input
+                            type="checkbox"
+                            value={data.id}
+                            onChange={(e) =>
+                              handleCheckboxChange(
+                                e.target.value,
+                                e.target.checked
+                              )
+                            }
+                          />
+                          {data.name}
+                        </label>
+                      </div>
+                      <div>
+                        <button
+                          className={
+                            data.status === "waiting"
+                              ? "waiting-btn"
+                              : data.status === "ready"
+                              ? "sending-btn"
+                              : data.status === "sent"
+                              ? "sent-btn"
+                              : ""
                           }
-                        />
-                        {data.name}
-                      </label>
-                    </div>
-                    <div>
-                      <button
-                        className={
-                          data.status === "waiting"
-                            ? "waiting-btn"
+                          onClick={() => onClick(data.id)}
+                          value={data.id}
+                        >
+                          {data.status === "waiting"
+                            ? "Send WhatsApp"
                             : data.status === "ready"
-                            ? "sending-btn"
+                            ? "Sending WhatsApp"
                             : data.status === "sent"
-                            ? "sent-btn"
-                            : ""
-                        }
-                        onClick={() => onClick(data.id)}
-                        value={data.id}
-                      >
-                        {data.status === "waiting"
-                          ? "Send WhatsApp"
-                          : data.status === "ready"
-                          ? "Sending WhatsApp"
-                          : data.status === "sent"
-                          ? "WhatsApp Sent"
-                          : ""}
-                      </button>
+                            ? "WhatsApp Sent"
+                            : ""}
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                );
-              }
-              return null;
-            })}
+                  );
+                }
+                return null;
+              })}
+            </div>
           </div>
         </div>
 
@@ -181,208 +193,221 @@ function Homepage() {
           <div className="sub-div-one">
             <div className="sub-sub-div nailart">
               <div className="heading">Nail Art</div>
-              {fetchApi.map((data) => {
-                if (data.activity === "Nails") {
-                  return (
-                    <div className="checkbox" key={data.id}>
-                      <div>
-                        <label>
-                          <input
-                            type="checkbox"
-                            value={data.id}
-                            onChange={(e) =>
-                              handleCheckboxChange(
-                                e.target.value,
-                                e.target.checked
-                              )
+              <div className="scroll-div">
+                {fetchApi.map((data, index) => {
+                  if (data.activity === "Nail Art") {
+                    return (
+                      <div className="checkbox" key={data.id}>
+                        <div>
+                          <label>
+                            {nailSerialNumber++}
+                            <input
+                              type="checkbox"
+                              value={data.id}
+                              onChange={(e) =>
+                                handleCheckboxChange(
+                                  e.target.value,
+                                  e.target.checked
+                                )
+                              }
+                            />
+                            {data.name}
+                          </label>
+                        </div>
+                        <div>
+                          <button
+                            className={
+                              data.status === "waiting"
+                                ? "waiting-btn"
+                                : data.status === "ready"
+                                ? "sending-btn"
+                                : data.status === "sent"
+                                ? "sent-btn"
+                                : ""
                             }
-                          />
-                          {data.name}
-                        </label>
-                      </div>
-                      <div>
-                        <button
-                          className={
-                            data.status === "waiting"
-                              ? "waiting-btn"
+                            onClick={() => onClick(data.id)}
+                            value={data.id}
+                          >
+                            {data.status === "waiting"
+                              ? "Send WhatsApp"
                               : data.status === "ready"
-                              ? "sending-btn"
+                              ? "Sending WhatsApp"
                               : data.status === "sent"
-                              ? "sent-btn"
-                              : ""
-                          }
-                          onClick={() => onClick(data.id)}
-                          value={data.id}
-                        >
-                          {data.status === "waiting"
-                            ? "Send WhatsApp"
-                            : data.status === "ready"
-                            ? "Sending WhatsApp"
-                            : data.status === "sent"
-                            ? "WhatsApp Sent"
-                            : ""}
-                        </button>
+                              ? "WhatsApp Sent"
+                              : ""}
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  );
-                }
-                return null;
-              })}
+                    );
+                  }
+                  return null;
+                })}
+              </div>
             </div>
 
             <div className="sub-sub-div manicure">
               <div className="heading">Manicure</div>
-              {fetchApi.map((data) => {
-                if (data.activity === "Manicure") {
-                  return (
-                    <div className="checkbox" key={data.id}>
-                      <div>
-                        <label>
-                          <input
-                            type="checkbox"
-                            value={data.id}
-                            onChange={(e) =>
-                              handleCheckboxChange(
-                                e.target.value,
-                                e.target.checked
-                              )
+              <div className="scroll-div">
+                {fetchApi.map((data, index) => {
+                  if (data.activity === "Manicure") {
+                    return (
+                      <div className="checkbox" key={data.id}>
+                        <div>
+                          <label>
+                            {manicureSerialNumber++}
+                            <input
+                              type="checkbox"
+                              value={data.id}
+                              onChange={(e) =>
+                                handleCheckboxChange(
+                                  e.target.value,
+                                  e.target.checked
+                                )
+                              }
+                            />
+                            {data.name}
+                          </label>
+                        </div>
+                        <div>
+                          <button
+                            className={
+                              data.status === "waiting"
+                                ? "waiting-btn"
+                                : data.status === "ready"
+                                ? "sending-btn"
+                                : data.status === "sent"
+                                ? "sent-btn"
+                                : ""
                             }
-                          />
-                          {data.name}
-                        </label>
-                      </div>
-                      <div>
-                        <button
-                          className={
-                            data.status === "waiting"
-                              ? "waiting-btn"
+                            onClick={() => onClick(data.id)}
+                            value={data.id}
+                          >
+                            {data.status === "waiting"
+                              ? "Send WhatsApp"
                               : data.status === "ready"
-                              ? "sending-btn"
+                              ? "Sending WhatsApp"
                               : data.status === "sent"
-                              ? "sent-btn"
-                              : ""
-                          }
-                          onClick={() => onClick(data.id)}
-                          value={data.id}
-                        >
-                          {data.status === "waiting"
-                            ? "Send WhatsApp"
-                            : data.status === "ready"
-                            ? "Sending WhatsApp"
-                            : data.status === "sent"
-                            ? "WhatsApp Sent"
-                            : ""}
-                        </button>
+                              ? "WhatsApp Sent"
+                              : ""}
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  );
-                }
-                return null;
-              })}
+                    );
+                  }
+                  return null;
+                })}
+              </div>
             </div>
           </div>
 
           <div className="sub-div-one">
             <div className="sub-sub-div art">
               <div className="heading">Art & Craft Workshop</div>
-              {fetchApi.map((data) => {
-                if (data.activity === "Art & Craft") {
-                  return (
-                    <div className="checkbox" key={data.id}>
-                      <div>
-                        <label>
-                          <input
-                            type="checkbox"
-                            value={data.id}
-                            onChange={(e) =>
-                              handleCheckboxChange(
-                                e.target.value,
-                                e.target.checked
-                              )
+              <div className="scroll-div">
+                {fetchApi.map((data, index) => {
+                  if (data.activity === "Art & Craft Workshop") {
+                    return (
+                      <div className="checkbox" key={data.id}>
+                        <div>
+                          {}
+                          <label>
+                            {artSerialNumber++}
+                            <input
+                              type="checkbox"
+                              value={data.id}
+                              onChange={(e) =>
+                                handleCheckboxChange(
+                                  e.target.value,
+                                  e.target.checked
+                                )
+                              }
+                            />
+                            {data.name}
+                          </label>
+                        </div>
+                        <div>
+                          <button
+                            className={
+                              data.status === "waiting"
+                                ? "waiting-btn"
+                                : data.status === "ready"
+                                ? "sending-btn"
+                                : data.status === "sent"
+                                ? "sent-btn"
+                                : ""
                             }
-                          />
-                          {data.name}
-                        </label>
-                      </div>
-                      <div>
-                        <button
-                          className={
-                            data.status === "waiting"
-                              ? "waiting-btn"
+                            onClick={() => onClick(data.id)}
+                            value={data.id}
+                          >
+                            {data.status === "waiting"
+                              ? "Send WhatsApp"
                               : data.status === "ready"
-                              ? "sending-btn"
+                              ? "Sending WhatsApp"
                               : data.status === "sent"
-                              ? "sent-btn"
-                              : ""
-                          }
-                          onClick={() => onClick(data.id)}
-                          value={data.id}
-                        >
-                          {data.status === "waiting"
-                            ? "Send WhatsApp"
-                            : data.status === "ready"
-                            ? "Sending WhatsApp"
-                            : data.status === "sent"
-                            ? "WhatsApp Sent"
-                            : ""}
-                        </button>
+                              ? "WhatsApp Sent"
+                              : ""}
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  );
-                }
-                return null;
-              })}
+                    );
+                  }
+                  return null;
+                })}
+              </div>
             </div>
 
             <div className="sub-sub-div facepainting">
               <div className="heading">Face Painting</div>
-              {fetchApi.map((data) => {
-                if (data.activity === "Face Painting") {
-                  return (
-                    <div className="checkbox" key={data.id}>
-                      <div>
-                        <label>
-                          <input
-                            value={data.id}
-                            type="checkbox"
-                            onChange={(e) =>
-                              handleCheckboxChange(
-                                e.target.value,
-                                e.target.checked
-                              )
+              <div className="scroll-div">
+                {fetchApi.map((data, index) => {
+                  if (data.activity === "Face Painting") {
+                    return (
+                      <div className="checkbox" key={data.id}>
+                        <div>
+                          <label>
+                            {faceSerialNumber++}
+                            <input
+                              value={data.id}
+                              type="checkbox"
+                              onChange={(e) =>
+                                handleCheckboxChange(
+                                  e.target.value,
+                                  e.target.checked
+                                )
+                              }
+                            />
+                            {data.name}
+                          </label>
+                        </div>
+                        <div>
+                          <button
+                            className={
+                              data.status === "waiting"
+                                ? "waiting-btn"
+                                : data.status === "ready"
+                                ? "sending-btn"
+                                : data.status === "sent"
+                                ? "sent-btn"
+                                : ""
                             }
-                          />
-                          {data.name}
-                        </label>
-                      </div>
-                      <div>
-                        <button
-                          className={
-                            data.status === "waiting"
-                              ? "waiting-btn"
+                            onClick={() => onClick(data.id)}
+                            value={data.id}
+                          >
+                            {data.status === "waiting"
+                              ? "Send WhatsApp"
                               : data.status === "ready"
-                              ? "sending-btn"
+                              ? "Sending WhatsApp"
                               : data.status === "sent"
-                              ? "sent-btn"
-                              : ""
-                          }
-                          onClick={() => onClick(data.id)}
-                          value={data.id}
-                        >
-                          {data.status === "waiting"
-                            ? "Send WhatsApp"
-                            : data.status === "ready"
-                            ? "Sending WhatsApp"
-                            : data.status === "sent"
-                            ? "WhatsApp Sent"
-                            : ""}
-                        </button>
+                              ? "WhatsApp Sent"
+                              : ""}
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  );
-                }
-                return null;
-              })}
+                    );
+                  }
+                  return null;
+                })}
+              </div>
             </div>
           </div>
         </div>
